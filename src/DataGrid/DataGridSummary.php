@@ -32,6 +32,12 @@ class DataGridSummary extends DataGridComponent
             $limit = $count;
         }
 
+        // Added by Jorge Garifuna:
+        //  We shouldn't expect limit to be 0, but for some reason it happens and this avoids dividing by 0 later on
+        if ($limit == 0) {
+            return;
+        }            
+        
         $start = $grid->getOffset();
         $end = min($start + $limit, $count);
         $page = floor(($start / $limit) + 1);
